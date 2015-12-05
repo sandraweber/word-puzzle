@@ -1,6 +1,6 @@
 FROM ubuntu
 ENV VIRTUAL_HOST puzzle.websome.ch
-ENV NODE_ENV test
+ENV NODE_ENV docker
 VOLUME ["/var/puzzle"]
 
 
