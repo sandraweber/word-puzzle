@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Word Puzzle</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <link rel="stylesheet" href="libs/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+
+    <link rel="icon" type="image/png" href="/icons/icon.png" />
+    <link rel="shortcut icon" type="image/png" href="/icons/icon.png" />
+      
+  </head>
+  <body ng-app="puzzle-app">
+
+    <md-toolbar class="md-default-theme page-title md-whiteframe-z2">
+        <div class="md-toolbar-tools">
+            <span flex="">
+                <md-button aria-label="menu" class="md-icon-button" ng-click="toggleSideNav()">
+                    <i class="material-icons">dehaze</i>
+                </md-button>
+            </span>
+            <h2>
+                <span>Word Puzzle</span>
+            </h2>
+        </div>
+    </md-toolbar>
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="sideNav">
+        <md-toolbar class="md-theme-light">
+            <div class="md-toolbar-tools">
+                <h2>Menu</h2>
+                <span flex="" class="puzzle-align-right">
+                    <md-button class="md-icon-button" aria-label="close side navigation" ng-click="toggleSideNav()">
+                        <i class="material-icons">keyboard_arrow_left</i>
+                    </md-button>
+                </span>
+            </div>
+        </md-toolbar>
+        <md-content>
+            <md-list>
+                <md-list-item class="md-1-line" aria-label="dashboard">
+                    <div class="md-icon-container">
+                        <i class="material-icons">games</i>
+                    </div>
+                    <span>Play</span>
+                </md-list-item>
+                <md-list-item class="md-1-line" aria-label="add purchase">
+                    <div class="md-icon-container">
+                        <i class="material-icons">group</i>
+                    </div>
+                    <span>Score</span>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-sidenav>
+
+    <div ng-view></div>
+
+    <script type="text/javascript" src="libs/angular/angular.js"></script>
+    <script type="text/javascript" src="libs/angular-route/angular-route.min.js"></script>
+    <script type="text/javascript" src="libs/angular-messages/angular-messages.min.js"></script>
+    <script type="text/javascript" src="libs/angular-animate/angular-animate.min.js"></script>
+    <script type="text/javascript" src="libs/angular-aria/angular-aria.min.js"></script>
+    <script type="text/javascript" src="libs/angular-material/angular-material.min.js"></script>
+    <script type="text/javascript" src="libs/angular-chartjs/Chart-min.js"></script>
+    <script type="text/javascript" src="libs/angular-chartjs/angular-chart.min.js"></script>
+    <script src="./js/all.js"></script>
+
+</body>
+</html>

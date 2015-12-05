@@ -1,0 +1,3 @@
+angular.module('puzzle-environment')
+	.constant('APP_HOST', 'http://<%= contents["app-host"] %>:<%= contents["app-port"] %>/')
+	.constant('API_HOST', 'http://<%= contents["app-host"] %>:<%= contents["app-port"] %>/api/');
