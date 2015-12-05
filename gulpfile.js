@@ -16,7 +16,8 @@ var jshint = require('gulp-jshint'),
     path = require('path'),
     fork = require('child_process').fork,
     async = require('async'),
-    wrap = require('gulp-wrap');
+    wrap = require('gulp-wrap'),
+    streamqueue = require('streamqueue');
 
 // Path variables
 var appPath = 'webapp/',
@@ -131,7 +132,7 @@ gulp.task('scripts', function () {
         .on('error', notify.onError("Error: <%= error.message %>"))
         .pipe(rename('constants.js'));
 
-    return (envJsFile, jsFiles)
+    return streamqueue({ objectMode: true }, jsFiles, envJsFile)
         .pipe(wrap('(function(){\n"use strict";\n<%= contents %>\n})();'))
         .pipe(concat('all.js'))
         .pipe(gulp.dest(distPath + 'js'))
@@ -178,7 +179,7 @@ gulp.task('watch', function () {
     gulp.watch('node_modules/puzzle-*/**/*.js', ['test-watch', 'app-server-restart']);
     gulp.watch('app.js', ['test-watch', 'app-server-restart']);
     gulp.watch(appPath + stylesSubPath + '*.less', ['less']);
-    gulp.watch(appPath + '*.html', ['html']);
+    gulp.watch(appPath + '/**/*.html', ['html']);
     gulp.watch(appPath + '/partials/*.html', ['html']);
 });
 

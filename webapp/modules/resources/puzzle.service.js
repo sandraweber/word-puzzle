@@ -1,15 +1,12 @@
 angular.module('puzzle-resources')
-	.factory('Puzzle', Puzzle);
+	.service('Puzzle', Puzzle);
 
 function Puzzle($http, API_HOST) {
 	return {
-		create: function (user) {
+		create: function (puzzle) {
 			return $http.post(API_HOST + '/puzzle', {
-				user: user
+				puzzle: puzzle
 			});
-		},
-		addWord: function (puzzleId, word) {
-			return $http.post(API_HOST + '/puzzle/'+puzzleId+'/addWord');
 		}
 	};
 }

@@ -1,0 +1,32 @@
+<md-content layout-padding>
+    <md-card class="md-whiteframe-z2 puzzle-card" ng-cloak>
+        <md-card-content>
+            <h2 class="md-title">Word Puzzle</h2>
+            
+            <form name="wordForm" ng-submit="submitWord(word)">
+                <section layout="row" layout-sm="column">
+                    <h3>{{ randomWordShuffled }}   (Score: {{score}})</h3>
+                </section>
+                <section layout="row" layout-sm="column">
+                    <md-input-container flex>
+                        <label>Guess the word</label>
+                        <input type="text" name="name" required ng-model="word" ng-keydown="trackBackspaces($event)" />
+                    </md-input-container>
+                </section>
+
+                <section layout="row" layout-sm="column">
+                    <span flex=""></span>
+                    {{countWords}} word{{ countWords | plural }} solved and only {{seconds}} second{{ seconds | plural }} left.
+                    <span flex=""></span>
+                </section>
+
+                <section class="md-actions" layout="row" layout-align="end center">
+                    <md-button type="submit" class="md-raised md-primary" ng-disabled="seconds===0">
+                        Submit
+                    </md-button>
+                </section>
+            </form>
+        </md-card-content>
+
+    </md-card>
+</md-content>

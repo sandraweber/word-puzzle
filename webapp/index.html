@@ -18,46 +18,50 @@
   </head>
   <body ng-app="puzzle-app">
 
-    <md-toolbar class="md-default-theme page-title md-whiteframe-z2">
-        <div class="md-toolbar-tools">
-            <span flex="">
-                <md-button aria-label="menu" class="md-icon-button" ng-click="toggleSideNav()">
-                    <i class="material-icons">dehaze</i>
-                </md-button>
-            </span>
-            <h2>
-                <span>Word Puzzle</span>
-            </h2>
-        </div>
-    </md-toolbar>
-    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="sideNav">
-        <md-toolbar class="md-theme-light">
+      <div ng-controller="menuController as menuController">
+        <md-toolbar class="md-default-theme page-title md-whiteframe-z2">
             <div class="md-toolbar-tools">
-                <h2>Menu</h2>
-                <span flex="" class="puzzle-align-right">
-                    <md-button class="md-icon-button" aria-label="close side navigation" ng-click="toggleSideNav()">
-                        <i class="material-icons">keyboard_arrow_left</i>
+                <span flex="">
+                    <md-button aria-label="menu" class="md-icon-button" ng-click="menuController.toggleSideNav()">
+                        <i class="material-icons">dehaze</i>
                     </md-button>
+                </span>
+                <h2>
+                    <span>Word Puzzle</span>
+                </h2>
+                <span flex="">
                 </span>
             </div>
         </md-toolbar>
-        <md-content>
-            <md-list>
-                <md-list-item class="md-1-line" aria-label="dashboard">
-                    <div class="md-icon-container">
-                        <i class="material-icons">games</i>
-                    </div>
-                    <span>Play</span>
-                </md-list-item>
-                <md-list-item class="md-1-line" aria-label="add purchase">
-                    <div class="md-icon-container">
-                        <i class="material-icons">group</i>
-                    </div>
-                    <span>Score</span>
-                </md-list-item>
-            </md-list>
-        </md-content>
-    </md-sidenav>
+        <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="sideNav">
+            <md-toolbar class="md-theme-light">
+                <div class="md-toolbar-tools">
+                    <h2>Menu</h2>
+                    <span flex="" class="puzzle-align-right">
+                        <md-button class="md-icon-button" aria-label="close side navigation" ng-click="menuController.toggleSideNav()">
+                            <i class="material-icons">keyboard_arrow_left</i>
+                        </md-button>
+                    </span>
+                </div>
+            </md-toolbar>
+            <md-content>
+                <md-list>
+                    <md-list-item class="md-1-line" aria-label="Play" ng-click="menuController.openPlay()">
+                        <div class="md-icon-container">
+                            <i class="material-icons">games</i>
+                        </div>
+                        <span>Play</span>
+                    </md-list-item>
+                    <md-list-item class="md-1-line" aria-label="Open score" ng-href="/score" ng-click="menuController.openScore()">
+                        <div class="md-icon-container">
+                            <i class="material-icons">group</i>
+                        </div>
+                        <span>Score</span>
+                    </md-list-item>
+                </md-list>
+            </md-content>
+        </md-sidenav>
+    </div>
 
     <div ng-view></div>
 

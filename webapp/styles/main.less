@@ -1,3 +1,15 @@
 @import "icons";
 @import "colors";
 @import "palette";
+@import "fixes";
+
+
+
+md-toast {
+  position: fixed;
+  color: @textPrimaryColor;
+
+  &[md-theme=puzzle-error-toast] {
+    background-color: @accentColor;
+  }
+}

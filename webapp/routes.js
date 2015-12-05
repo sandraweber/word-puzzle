@@ -2,14 +2,12 @@ angular.module('puzzle-app')
 	.config(function ($routeProvider) {
 		$routeProvider.
 			when('/', {
-				templateUrl: 'modules/puzzle-ui/enterUser.html',
-				controller: 'puzzleController',
-				controllerAs: 'puzzleController'
+				templateUrl: 'modules/puzzle-ui/intro.html',
+				controller: 'introController'
 			}).
 			when('/play', {
 				templateUrl: 'modules/puzzle-ui/puzzle.html',
-				controller: 'puzzleController',
-				controllerAs: 'puzzleController'
+				controller: 'puzzleController'
 			}).
 			otherwise({
 				redirectTo: '/'

@@ -1,0 +1,37 @@
+<md-content layout-padding>
+    <md-card class="md-whiteframe-z2 puzzle-card" ng-cloak>
+        <md-card-content>
+            <form name="userForm" ng-submit="startGame()">
+                <h2 class="md-title">Ready to start the game?</h2>
+
+                <section layout="row">
+                    <small>
+                        In the Word Puzzle you have to figure out the correct word by a mess of shuffled letters. 
+                        The longer the word the more points you can score. However be sure to think before you type! 
+                        Any deleting will result in a decreased score.<br/>
+                        You will have {{secondsPerGame}} seconds to solve as many word puzzles as possible.
+                    </small>
+                </section>
+                
+                <section layout="row">
+                    &nbsp;
+                </section>
+                        
+                <section layout="row" layout-sm="column">
+                    <md-input-container flex>
+                        <label>Please enter your name</label>
+                        <input type="text" name="name" md-maxlength="30" required ng-model="username" />
+                        <div ng-messages="userForm.name.$error" ng-show="userForm.$submitted || userForm.name.$touched">
+                            <div ng-message="required">You need to enter a name</div>
+                            <div ng-message="md-maxlength">The name should not be longer than 30 letters.</div>
+                        </div>
+                    </md-input-container>
+                </section>
+                
+                <section class="md-actions" layout="row" layout-align="end center">
+                    <md-button type="submit" class="md-raised md-primary">Start the game</md-button>
+                </section>
+            </form>
+        </md-card-content>
+    </md-card>
+</md-content>

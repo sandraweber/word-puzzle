@@ -1,3 +1,4 @@
 angular.module('puzzle-environment')
 	.constant('APP_HOST', 'http://<%= contents["app-host"] %>:<%= contents["app-port"] %>/')
-	.constant('API_HOST', 'http://<%= contents["app-host"] %>:<%= contents["app-port"] %>/api/');
+	.constant('API_HOST', 'http://<%= contents["app-host"] %>:<%= contents["app-port"] %>/api/')
+	.constant('SECONDS_PER_GAME', 40);
