@@ -4,9 +4,7 @@ angular.module('puzzle-resources')
 function Puzzle($http, API_HOST) {
 	return {
 		create: function (puzzle) {
-			return $http.post(API_HOST + '/puzzle', {
-				puzzle: puzzle
-			});
+			return $http.post(API_HOST + 'puzzle', puzzle);
 		}
 	};
 }
