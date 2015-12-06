@@ -1,4 +1,4 @@
-angular.module('puzzle-ui').filter('shuffle', function() {
+angular.module('puzzle-game').filter('shuffle', function() {
     return function(input) {
         var shuffledInput = input.split('');
         for(var i = input.length - 1; i > 0; i--) {

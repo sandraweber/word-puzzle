@@ -1,0 +1,39 @@
+<md-content layout-padding>
+    <md-card class="md-whiteframe-z2 nooch-card" ng-cloak>
+        <md-card-content>
+            <h2 class="md-title">Puzzle Game</h2>
+            
+            <section layout="row">
+                {{detailController.puzzle.user.name}} scored {{detailController.puzzle.totalScore}} point{{detailController.puzzle.totalScore | plural}} 
+                with {{detailController.puzzle.words.length}} word{{detailController.puzzle.words.length | plural}}.
+            </section>
+            <section>
+                <md-list>
+                    <md-list-item class="md-2-line" ng-repeat="word in detailController.puzzle.words">
+                        <div class="md-list-item-inner" flex="">
+                            <i class="material-icons md-dark" flex="10">bookmark</i>
+                            <div class="md-list-item-text" flex>
+                                <h3>{{ word.word }}</h3>
+                                <p>{{ word.shuffledWord }}</p>
+                            </div>
+                            <div class="puzzle-align-right" flex="15">{{ word.score }}</div>
+                            <md-divider ng-if="!$last"></md-divider>
+                        </div>
+                    </md-list-item>
+                </md-list>
+                <div ng-show="detailController.puzzle.words.length==0" flex="100" flex-order="1" layout="column" layout-align="center center">
+                    <span><i class="material-icons">announcement</i></span>
+                    <span class="puzzle-small-text">No words were solved correctly.</span>
+                </div>
+            </section>
+            <section>
+                <md-button type="button" class="md-raised" ng-click="detailController.openScore()">
+                    Open score
+                </md-button>
+                <md-button type="button" class="md-raised" ng-click="detailController.playGame()">
+                    Play a game
+                </md-button>
+            </section>
+        </md-card-content>
+    </md-card>
+</md-content>

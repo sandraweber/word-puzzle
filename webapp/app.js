@@ -6,14 +6,18 @@ angular.module('puzzle-app', [
 
     /* puzzle modules */
     'puzzle-resources',
-    'puzzle-ui',
-    'puzzle-environment'
+    'puzzle-game',
+    'puzzle-score',
+    'puzzle-environment',
+    'puzzle-game'
 ]);
 
 /* Other Modules (Utility, Resources, ..) */
 angular.module('puzzle-environment', []);
+angular.module('puzzle-utils', []);
 angular.module('puzzle-resources', ['puzzle-environment']);
 
 /* UI Modules */
-angular.module('puzzle-ui', ['puzzle-resources']);
+angular.module('puzzle-game', ['puzzle-resources', 'puzzle-utils']);
+angular.module('puzzle-score', ['puzzle-resources']);
 

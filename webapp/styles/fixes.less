@@ -1,8 +1,25 @@
-/** Menu */
-.md-button i {
+/* Menu */
+i {
     vertical-align: middle;
 }
-md-list-item i {
-    vertical-align: middle;
-    margin-right: 10px;
+
+md-sidenav {
+    md-list-item {
+        i {
+            margin-right: 10px;
+        }
+        
+        /* Background */
+        button.md-button {
+            background-color: white;
+            &:not([disabled]):hover {
+                background-color: #E7E7E7;
+            }
+        }
+    } 
+}
+
+/* Ng-Cloak */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
 }

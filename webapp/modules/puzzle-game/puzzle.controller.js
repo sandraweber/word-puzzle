@@ -1,4 +1,4 @@
-angular.module('puzzle-ui').controller('puzzleController', PuzzleController);
+angular.module('puzzle-game').controller('puzzleController', PuzzleController);
 
 function PuzzleController($scope, $interval, $location, $filter, Toast, SECONDS_PER_GAME, Word, Puzzle, User) {
     if (!User.get()) {
@@ -10,10 +10,11 @@ function PuzzleController($scope, $interval, $location, $filter, Toast, SECONDS_
     function startGame() {
         $scope.seconds = SECONDS_PER_GAME;
         $scope.puzzle = {
-            username: User.get().name,
+            timestamp: new Date(),
+            user: User.get(),
             words: [],
             totalScore: 0
-        }
+        };
 
         createNewRandomWord();
         $interval(function() {
@@ -69,9 +70,9 @@ function PuzzleController($scope, $interval, $location, $filter, Toast, SECONDS_
     }
     
     function stopGame() {
-        Puzzle.create($scope.puzzle, function(result) {  
-            Toast.info('You finished with a total score of '+$scope.totalScore);
-            $location.path('/');
+        Toast.info('You finished with a total score of '+$scope.puzzle.totalScore);
+        Puzzle.create($scope.puzzle).success(function(result) {
+            $location.path('/detail/'+result._id);
         });
     }
 }

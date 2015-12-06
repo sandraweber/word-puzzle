@@ -2,12 +2,32 @@ angular.module('puzzle-app')
 	.config(function ($routeProvider) {
 		$routeProvider.
 			when('/', {
-				templateUrl: 'modules/puzzle-ui/intro.html',
+				templateUrl: 'modules/puzzle-game/intro.html',
 				controller: 'introController'
 			}).
 			when('/play', {
-				templateUrl: 'modules/puzzle-ui/puzzle.html',
+				templateUrl: 'modules/puzzle-game/puzzle.html',
 				controller: 'puzzleController'
+			}).
+			when('/score', {
+				templateUrl: 'modules/puzzle-score/score.html',
+				controller: 'scoreController',
+                controllerAs: 'scoreController',
+				resolve: {
+					resolvedPuzzles: function(Puzzle) {
+						return Puzzle.getAll();
+					}
+				}
+			}).
+			when('/detail/:puzzleId', {
+				templateUrl: 'modules/puzzle-score/detail.html',
+				controller: 'detailController',
+                controllerAs: 'detailController',
+				resolve: {
+					resolvedPuzzle: function(Puzzle, $route) {
+						return Puzzle.get($route.current.params.puzzleId);
+					}
+				}
 			}).
 			otherwise({
 				redirectTo: '/'

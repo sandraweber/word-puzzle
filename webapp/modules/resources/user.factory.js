@@ -1,4 +1,4 @@
-angular.module('puzzle-ui').factory('User', function() {
+angular.module('puzzle-resources').factory('User', function() {
     return new UserStorage();
 });
 

@@ -1,4 +1,4 @@
-angular.module('puzzle-ui').controller('introController', IntroController);
+angular.module('puzzle-game').controller('introController', IntroController);
 
 function IntroController(Puzzle, $location, $scope, SECONDS_PER_GAME, User) {
 

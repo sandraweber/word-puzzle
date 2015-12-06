@@ -1,4 +1,4 @@
-angular.module('puzzle-ui')
+angular.module('puzzle-utils')
 	.factory('Toast', Toast);
 
 function Toast($mdToast) {
