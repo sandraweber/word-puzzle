@@ -1,4 +1,5 @@
 {
     "app-host": "localhost",
-    "app-port": 80
+    "app-port": 80,
+    "remote-host": "puzzle.websome.ch"
 }
