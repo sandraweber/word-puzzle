@@ -1,11 +1,10 @@
 angular.module('puzzle-resources')
 	.service('Word', Word);
 
-function Word($http) {
+function Word($http, API_HOST) {
 	return {
 		randomWord: function () {
-            // TODO replace with service with better words or implement own
-			return $http.get('http://randomword.setgetgo.com/get.php');
+			return $http.get(API_HOST + 'word');
 		}
 	};
 }

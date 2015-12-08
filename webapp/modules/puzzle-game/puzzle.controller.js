@@ -59,8 +59,8 @@ function PuzzleController($scope, $interval, $location, $filter, Toast, SECONDS_
     }
     
     function createNewRandomWord() {
-        Word.randomWord().success(function(randomWord) {
-            $scope.randomWord = randomWord;
+        Word.randomWord().success(function(result) {
+            $scope.randomWord = result.word;
             $scope.word = '';
             $scope.deletedChars = 0;
             $scope.randomWordShuffled = $filter('shuffle')($scope.randomWord);
