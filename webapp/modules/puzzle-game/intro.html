@@ -20,7 +20,7 @@
                 <section layout="row" layout-sm="column">
                     <md-input-container flex>
                         <label>Please enter your name</label>
-                        <input type="text" name="name" md-maxlength="30" required ng-model="username" />
+                        <input type="text" name="name" md-maxlength="30" required ng-model="username" autocomplete="off"/>
                         <div ng-messages="userForm.name.$error" ng-show="userForm.$submitted || userForm.name.$touched">
                             <div ng-message="required">You need to enter a name</div>
                             <div ng-message="md-maxlength">The name should not be longer than 30 letters.</div>

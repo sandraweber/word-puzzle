@@ -8,7 +8,17 @@ angular.module('puzzle-app')
 			when('/play', {
 				templateUrl: 'modules/puzzle-game/puzzle.html',
 				controller: 'puzzleController',
-                controllerAs: 'puzzleController'
+                controllerAs: 'puzzleController',
+                resolve: {
+                    resolvedUser: function(User, $location) {
+                        var user = User.get();
+                        if (!user) {
+                            $location.path('/');
+                        } else {
+                            return user;
+                        }
+                    }
+                }
 			}).
 			when('/score', {
 				templateUrl: 'modules/puzzle-score/score.html',

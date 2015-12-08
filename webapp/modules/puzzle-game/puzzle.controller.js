@@ -1,17 +1,17 @@
 angular.module('puzzle-game').controller('puzzleController', PuzzleController);
 
-function PuzzleController($interval, $location, $filter, Toast, SECONDS_PER_GAME, Word, Puzzle, User, ScoreCalculator) {
-    activate();
+function PuzzleController($interval, $location, $filter, Toast, SECONDS_PER_GAME, Word, Puzzle, resolvedUser, ScoreCalculator) {
     
     var viewModel = this;
     
     viewModel.puzzle = {
             timestamp: new Date(),
-            user: User.get(),
+            user: resolvedUser,
             words: [],
             totalScore: 0
         };
     viewModel.seconds = SECONDS_PER_GAME;
+    viewModel.maxSeconds = SECONDS_PER_GAME;
     viewModel.currentWord = {
                 word: undefined,
                 shuffledWord: undefined,
@@ -26,14 +26,7 @@ function PuzzleController($interval, $location, $filter, Toast, SECONDS_PER_GAME
     viewModel.nextWord = nextWord;
     viewModel.trackBackspaces = trackBackspaces;
     
-    
-    function activate() {
-        if (!User.get()) {
-            $location.path('/');
-        } else {
-            startGame();
-        }
-    }
+    startGame();
 
     function startGame() {
         nextWord(startTimer);
@@ -49,14 +42,14 @@ function PuzzleController($interval, $location, $filter, Toast, SECONDS_PER_GAME
         }, 1000, SECONDS_PER_GAME+1);
     }
     
-    function submitWord(word) {
-        if (word === viewModel.currentWord.word) {
+    function submitWord(input) {
+        if (input === viewModel.currentWord.word) {
             viewModel.puzzle.words.push(viewModel.currentWord);
             viewModel.puzzle.totalScore += viewModel.currentWord.score;
             nextWord();
-            Toast.info('Correct! The word is '+word+'.');
+            Toast.info('Correct! The word is '+input+'.');
         } else {
-            Toast.error('Wrong! '+word+' is not what we are looking for.');
+            Toast.error('Wrong! '+input+' is not what we are looking for.');
         }
     }
     
