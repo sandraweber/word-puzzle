@@ -3,25 +3,28 @@
         <md-card-content>
             <h2 class="md-title">Word Puzzle</h2>
             
-            <form name="wordForm" ng-submit="submitWord(word)">
+            <form name="wordForm" ng-submit="puzzleController.submitWord(word)">
                 <section layout="row" layout-sm="column">
-                    <h3>{{ randomWordShuffled }}   (Score: {{score}})</h3>
+                    <h3>{{ puzzleController.currentWord.shuffledWord }}   (Score: {{puzzleController.currentWord.score}})</h3>
                 </section>
                 <section layout="row" layout-sm="column">
                     <md-input-container flex>
                         <label>Guess the word</label>
-                        <input type="text" name="name" required ng-model="word" ng-keydown="trackBackspaces($event)" />
-                    </md-input-container>
+                        <input type="text" name="name" required ng-model="word" ng-keydown="puzzleController.trackBackspaces($event)" />
+                    </md-input-container>.
                 </section>
 
                 <section layout="row" layout-sm="column">
                     <span flex=""></span>
-                    {{puzzle.words.length}} word{{ puzzle.words.length | plural }} solved and only {{seconds}} second{{ seconds | plural }} left.
+                    {{puzzleController.puzzle.words.length}} word{{ puzzleController.puzzle.words.length | plural }} solved and only {{puzzleController.seconds}} second{{ puzzleController.seconds | plural }} left.
                     <span flex=""></span>
                 </section>
 
                 <section class="md-actions" layout="row" layout-align="end center">
-                    <md-button type="submit" class="md-raised md-primary" ng-disabled="seconds===0">
+                    <md-button type="button" class="md-raised" ng-show="puzzleController.currentWord.score===0" ng-click="puzzleController.nextWord()">
+                        Skip
+                    </md-button>
+                    <md-button type="submit" class="md-raised md-primary" ng-disabled="puzzleController.seconds===0">
                         Submit
                     </md-button>
                 </section>

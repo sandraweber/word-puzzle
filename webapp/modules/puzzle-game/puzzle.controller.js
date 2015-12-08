@@ -1,77 +1,98 @@
 angular.module('puzzle-game').controller('puzzleController', PuzzleController);
 
-function PuzzleController($scope, $interval, $location, $filter, Toast, SECONDS_PER_GAME, Word, Puzzle, User) {
-    if (!User.get()) {
-        $location.path('/');
-    } else {
-        startGame();
-    }
-
-    function startGame() {
-        $scope.seconds = SECONDS_PER_GAME;
-        $scope.puzzle = {
+function PuzzleController($interval, $location, $filter, Toast, SECONDS_PER_GAME, Word, Puzzle, User, ScoreCalculator) {
+    activate();
+    
+    var viewModel = this;
+    
+    viewModel.puzzle = {
             timestamp: new Date(),
             user: User.get(),
             words: [],
             totalScore: 0
         };
+    viewModel.seconds = SECONDS_PER_GAME;
+    viewModel.currentWord = {
+                word: undefined,
+                shuffledWord: undefined,
+                maxScore: undefined,
+                score: undefined
+            };
+    
+    viewModel.input = '';
+    viewModel.deletedChars = 0;
+    
+    viewModel.submitWord = submitWord;
+    viewModel.nextWord = nextWord;
+    viewModel.trackBackspaces = trackBackspaces;
+    
+    
+    function activate() {
+        if (!User.get()) {
+            $location.path('/');
+        } else {
+            startGame();
+        }
+    }
 
-        createNewRandomWord();
+    function startGame() {
+        nextWord(startTimer);
+    }
+    
+    function startTimer() {
         $interval(function() {
-            if ($scope.seconds === 0) {
+            if (viewModel.seconds === 0) {
                 stopGame();
             } else {
-                $scope.seconds--;
+                viewModel.seconds--;
             }
         }, 1000, SECONDS_PER_GAME+1);
     }
     
-    $scope.submitWord = function(word) {
-        if (word === $scope.randomWord) {
-            $scope.puzzle.words.push({
-                word: word,
-                shuffledWord: $scope.randomWordShuffled,
-                score: $scope.score
-            });
-            $scope.puzzle.totalScore += $scope.score;
-            createNewRandomWord();
+    function submitWord(word) {
+        if (word === viewModel.currentWord.word) {
+            viewModel.puzzle.words.push(viewModel.currentWord);
+            viewModel.puzzle.totalScore += viewModel.currentWord.score;
+            nextWord();
             Toast.info('Correct! The word is '+word+'.');
         } else {
             Toast.error('Wrong! '+word+' is not what we are looking for.');
         }
-    };
+    }
     
-    $scope.trackBackspaces = function(word) {
+    function trackBackspaces(word) {
         switch(event.keyCode) {
             case 8: // backspace
             case 46: // deleted
-                $scope.deletedChars++;
-                recalculateScore();
+                viewModel.deletedChars++;
+                viewModel.currentWord.score = ScoreCalculator.calculate(viewModel.currentWord.word, viewModel.deletedChars);
                 break;
             default:
                 break;
         }
-    };
-    
-    function recalculateScore() {
-        var n = Math.max(0, $scope.randomWord.length - $scope.deletedChars);
-        $scope.score = Math.floor(Math.pow(1.95, n/3));
     }
     
-    function createNewRandomWord() {
+    function nextWord(callback) {
         Word.randomWord().success(function(result) {
-            $scope.randomWord = result.word;
-            $scope.word = '';
-            $scope.deletedChars = 0;
-            $scope.randomWordShuffled = $filter('shuffle')($scope.randomWord);
-            recalculateScore();
-            $scope.maxScore = $scope.score;
+            
+            var maxScore = ScoreCalculator.calculate(result.word, 0);
+            viewModel.currentWord = {
+                word: result.word,
+                shuffledWord: $filter('shuffle')(result.word),
+                maxScore: maxScore,
+                score: maxScore
+            };
+            
+            viewModel.input = '';
+            viewModel.deletedChars = 0;
+            
+            if (callback) callback();
         });
     }
     
     function stopGame() {
-        Toast.info('You finished with a total score of '+$scope.puzzle.totalScore);
-        Puzzle.create($scope.puzzle).success(function(result) {
+        Toast.info('You finished with a total score of '+viewModel.puzzle.totalScore);
+        Puzzle.create(viewModel.puzzle).success(function(result) {
             $location.path('/detail/'+result._id);
         });
     }

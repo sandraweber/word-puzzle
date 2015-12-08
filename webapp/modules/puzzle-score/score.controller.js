@@ -10,6 +10,6 @@ function ScoreController($location, resolvedPuzzles) {
     };
     
     viewModel.openScoreInDetail = function(puzzle) {
-        $location.path('/detail/'+puzzle._id)
+        $location.path('/detail/'+puzzle._id);
     };
 }

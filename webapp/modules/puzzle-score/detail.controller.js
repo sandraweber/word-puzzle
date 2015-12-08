@@ -7,7 +7,7 @@ function DetailController($location, resolvedPuzzle) {
     
     viewModel.openScore = function() {
         $location.path('/score');
-    }
+    };
     
     viewModel.playGame = function() {
         $location.path('/play');

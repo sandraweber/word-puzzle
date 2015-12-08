@@ -7,7 +7,8 @@ angular.module('puzzle-app')
 			}).
 			when('/play', {
 				templateUrl: 'modules/puzzle-game/puzzle.html',
-				controller: 'puzzleController'
+				controller: 'puzzleController',
+                controllerAs: 'puzzleController'
 			}).
 			when('/score', {
 				templateUrl: 'modules/puzzle-score/score.html',
